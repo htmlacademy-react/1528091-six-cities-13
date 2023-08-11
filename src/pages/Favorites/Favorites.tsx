@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/Footer/Footer';
 
 function Favorites() {
   return (
@@ -167,6 +168,7 @@ function Favorites() {
           </ul>
         </section>
       </div>
+      <Footer/>
     </main>
   );
 }

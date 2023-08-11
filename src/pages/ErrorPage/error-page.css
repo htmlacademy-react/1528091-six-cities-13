@@ -1,0 +1,25 @@
+.error-page {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-page__text {
+  font-size: 3.8rem;
+  margin-bottom: 3rem;
+}
+
+.error-page__link {
+  transition: 0.4s;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.error-page__link:hover {
+  transition: 0.4s;
+  color: #4481c3;
+  text-decoration: none;
+
+}
