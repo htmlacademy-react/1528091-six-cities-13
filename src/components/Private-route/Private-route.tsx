@@ -3,7 +3,7 @@ import PrivateRouteProps from '../../utils/types/PrivateRoureProps';
 
 
 function PrivateRoute({children}: PrivateRouteProps): JSX.Element {
-  const hasAccess = false;
+  const hasAccess = true;
 
   return hasAccess ? children : <Navigate to={'/login'} />;
 }
