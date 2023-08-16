@@ -18,13 +18,13 @@ function App(props: MainProps) {
         <Header/>
         <Routes>
           <Route path='/' element={<Layout/>}/>
-          <Route index element={<Main offersNumber={props.offersNumber}/>} />
+          <Route index element={<Main {...props}/>} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/offer/:id' element={<Offer/>}/>
           <Route path='*' element={<ErrorPage/>}/>
           <Route path='/favorites' element={
             <PrivateRoute>
-              <Favorites />
+              <Favorites list = {props.favoritesList} />
             </PrivateRoute>
           }
           />

@@ -1,9 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Card from '../../components/Card/Card';
-import cardList from '../../../mockData/cardData.json';
 import MainProps from '../../utils/types/MainType';
-
 
 function Main(props: MainProps) {
   return (
@@ -67,7 +65,7 @@ function Main(props: MainProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {cardList.map((card) => (
+                {props.cardsList.map((card) => (
                   <Card key = {uuidv4()}
                     title = {card.title}
                     isPremium = {card.isPremium}
