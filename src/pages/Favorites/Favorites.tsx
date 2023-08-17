@@ -46,25 +46,22 @@ function Favorites(props: List) {
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            {Object.entries(dataObject).map((entry) =>
-              entry[1].length > 0 ?
-                <li key = {uuidv4()} className="favorites__locations-items">
+            {Object.entries(dataObject).map(([city, favoriteOffersList]) =>
+              favoriteOffersList.length > 0 &&
+                <li key = {city} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
                       <a className="locations__item-link" href="#">
-                        <span>{entry[0]}</span>
+                        <span>{city}</span>
                       </a>
                     </div>
                   </div>
                   <div className="favorites__places">
 
-                    {entry[1].map((favoriteItem) => favoriteItem.isFavorite && favoriteItem.city.name === entry[0] ?
-                      <FavoriteCard key={favoriteItem.id} {...favoriteItem}/> :
-                      null)}
+                    {favoriteOffersList.map((favoriteItem) =>
+                      <FavoriteCard key={favoriteItem.id} {...favoriteItem}/>)}
                   </div>
                 </li>
-                :
-                null
             )}
           </ul>
         </section>

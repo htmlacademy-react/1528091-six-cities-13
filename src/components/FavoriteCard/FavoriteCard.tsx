@@ -7,7 +7,7 @@ function FavoriteCard(props: FavoriteOfferType) {
 
   return (
     <article className="favorites__card place-card">
-      {/* сделать скрытие */}
+
       <div className={`place-card__mark ${props.isPremium ? '' : 'hidden'}`} >
         <span>{props.isPremium ? 'Premium' : ''}</span>
       </div>

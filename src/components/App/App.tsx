@@ -8,7 +8,7 @@ import Login from '../../pages/Login/Login';
 import Favorites from '../../pages/Favorites/Favorites';
 import Offer from '../../pages/Offer/Offer';
 import ErrorPage from '../../pages/ErrorPage/ErrorPage';
-import PrivateRoute from '../Private-route/Private-route';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 
 function App(props: MainProps) {
