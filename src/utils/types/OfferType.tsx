@@ -1,4 +1,4 @@
-type Offer = {
+type OfferType = {
   id: string;
   title: string;
   type: string;
@@ -23,4 +23,4 @@ type OfferLocation = {
 }
 
 
-export default Offer;
+export type {OfferType, OfferCity};

@@ -1,9 +1,9 @@
 import FavoriteOfferType from './FavoritesType';
-import Offer from './OfferType';
+import { OfferType } from './OfferType';
 
 type MainProps = {
   offersNumber: number;
-  cardsList: Offer[];
+  cardsList: OfferType[];
   favoritesList: FavoriteOfferType[];
 }
 
