@@ -1,0 +1,13 @@
+.offer__rating {
+  align-items: center;
+}
+.rating__stars {
+  background-image: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: auto;
+}
+.rating__stars::before {
+  display: none;
+}

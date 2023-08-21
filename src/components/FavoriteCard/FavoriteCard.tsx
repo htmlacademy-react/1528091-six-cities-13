@@ -1,4 +1,3 @@
-import React from 'react';
 import './favoriteCard.css';
 import FavoriteOfferType from '../../utils/types/FavoritesType';
 import { Link } from 'react-router-dom';
@@ -7,10 +6,10 @@ function FavoriteCard(props: FavoriteOfferType) {
 
   return (
     <article className="favorites__card place-card">
-
-      <div className={`place-card__mark ${props.isPremium ? '' : 'hidden'}`} >
-        <span>{props.isPremium ? 'Premium' : ''}</span>
-      </div>
+      {props.isPremium &&
+      <div className={'place-card__mark'} >
+        <span>Premium</span>
+      </div>}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img

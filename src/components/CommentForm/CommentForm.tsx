@@ -1,5 +1,6 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, Fragment, useState } from 'react';
 import { COMMENT_MAX_LENGTH, ratingMap } from '../../utils/constants';
+import Rating from '../Rating/Rating';
 type handleFormDataType = ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 function CommentForm() {
 
@@ -25,7 +26,7 @@ function CommentForm() {
       <div className="reviews__rating-form form__rating">
         {ratingMap.map(({score, title}) =>
           (
-            <>
+            <Fragment key = {score}>
               <input
                 className="form__rating-input visually-hidden"
                 name="rating"
@@ -43,7 +44,7 @@ function CommentForm() {
                   <use xlinkHref="#icon-star" />
                 </svg>
               </label>
-            </>
+            </Fragment>
           )
         )}
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import './error-page.css';
 import { Link } from 'react-router-dom';
 
@@ -12,3 +11,5 @@ function ErrorPage() {
 }
 
 export default ErrorPage;
+
+

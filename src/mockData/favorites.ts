@@ -43,7 +43,7 @@ const favoritesList =
       'zoom': 16
     },
     'isFavorite': true,
-    'isPremium': false,
+    'isPremium': true,
     'rating': 2.9
   },
   {
@@ -65,7 +65,7 @@ const favoritesList =
       'longitude': 2.335499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.3
   },
@@ -1445,7 +1445,7 @@ const favoritesList =
       'longitude': 4.9099759999999995,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.2
   },

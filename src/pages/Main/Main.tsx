@@ -1,9 +1,58 @@
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import Card from '../../components/Card/Card';
-import MainProps from '../../utils/types/MainType';
+import Map from '../../components/Map/Map';
+import OffersList from '../../components/Card/CardsList';
+import { useEffect, useState } from 'react';
+import { OfferCity, OfferType } from '../../utils/types/OfferType';
+import dataObjType from '../../utils/types/DataObjectType';
+import { DEFAULT_CITY_LOCATION } from '../../utils/constants';
 
-function Main(props: MainProps) {
+type MainPropsType = {
+  cardsList: dataObjType;
+}
+
+function Main(props: MainPropsType) {
+
+  const {cardsList} = props;
+  const [selectedPoint, setSelectedPoint] = useState<OfferType | undefined>(
+    undefined
+  );
+  const [activeCityName, setActiveCityName] = useState('Paris');
+  const [activeCityOffers, setActiveCityOffers] = useState<OfferType[]>(
+    []
+  );
+  const [activeCityLocation, setActiveCityLocation] = useState<OfferCity>(
+    DEFAULT_CITY_LOCATION
+  );
+
+  const handleListItemHover = (cardId: string) => {
+
+    let currentPoint: OfferType;
+    for (const value of Object.values(cardsList)) {
+
+      currentPoint = value.find((card) => card.id === cardId);
+      if(currentPoint) {
+        setSelectedPoint(currentPoint);
+      }
+
+    }
+  };
+
+
+  const handleCityChoice = (city: string) => {
+    const offersArray = Object.entries(cardsList);
+    offersArray.forEach(([key, value]) => {
+      setActiveCityName(city);
+      if (key === activeCityName) {
+        setActiveCityOffers(value);
+        setActiveCityLocation(value[0]['city']);
+      }
+    });
+  };
+
+  useEffect(() => {
+    handleCityChoice(activeCityName);
+  }, [activeCityName, activeCityLocation]);
+
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
@@ -11,36 +60,17 @@ function Main(props: MainProps) {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {Object.keys(cardsList).map((city) =>
+                (
+                  <li key = {city} className="locations__item">
+                    <a className={`locations__item-link tabs__item ${city === activeCityName ? 'tabs__item--active' : ''}`}
+                      href="#" onClick={() => handleCityChoice(city)}
+                    >
+                      <span>{city}</span>
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
           </section>
         </div>
@@ -48,7 +78,7 @@ function Main(props: MainProps) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{props.offersNumber} places to stay in Amsterdam</b>
+              <b className="places__found">{activeCityOffers.length} places to stay in {activeCityName}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -64,20 +94,12 @@ function Main(props: MainProps) {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {props.cardsList.map((card) => (
-                  <Card key = {uuidv4()}
-                    title = {card.title}
-                    isPremium = {card.isPremium}
-                    previewImage = {card.previewImage}
-                    price = {card.price}
-                    type = {card.type}
-                  />
-                ))}
-              </div>
+              <OffersList cardsList = {activeCityOffers} onCardHover={handleListItemHover}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city = {activeCityLocation} points={activeCityOffers} selectedPoint={selectedPoint}/>
+              </section>
             </div>
           </div>
         </div>
