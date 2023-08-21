@@ -27,8 +27,8 @@ function Favorites(props: List) {
                   </div>
                   <div className="favorites__places">
 
-                    {favoriteOffersList.map((favoriteItem) =>
-                      <FavoriteCard key = {favoriteItem.id} {...favoriteItem}/>)}
+                    {favoriteOffersList.length > 0 && favoriteOffersList.map((favoriteItem) =>
+                      <FavoriteCard key = {Date.now()} {...favoriteItem}/>)}
                   </div>
                 </li>
             )}

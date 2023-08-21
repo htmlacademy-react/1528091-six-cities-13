@@ -1,6 +1,5 @@
 import { ChangeEventHandler, Fragment, useState } from 'react';
 import { COMMENT_MAX_LENGTH, ratingMap } from '../../utils/constants';
-import Rating from '../Rating/Rating';
 type handleFormDataType = ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 function CommentForm() {
 

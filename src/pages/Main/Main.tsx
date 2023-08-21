@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { OfferCity, OfferType } from '../../utils/types/OfferType';
 import dataObjType from '../../utils/types/DataObjectType';
 import { DEFAULT_CITY_LOCATION } from '../../utils/constants';
+import cardsMockList from '../../mockData/cardData';
 
 type MainPropsType = {
   cardsList: dataObjType;
@@ -19,21 +20,18 @@ function Main(props: MainPropsType) {
   const [activeCityOffers, setActiveCityOffers] = useState<OfferType[]>(
     []
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeCityLocation, setActiveCityLocation] = useState<OfferCity>(
     DEFAULT_CITY_LOCATION
   );
 
-  const handleListItemHover = (cardId: string) => {
-
-    let currentPoint: OfferType;
-    for (const value of Object.values(cardsList)) {
-
-      currentPoint = value.find((card) => card.id === cardId);
-      if(currentPoint) {
-        setSelectedPoint(currentPoint);
-      }
-
+  const handleListItemHover = (cardId?: string) => {
+    const currentPoint = cardsMockList.find((card) => card.id === cardId);
+    if(currentPoint) {
+      setSelectedPoint(currentPoint);
     }
+
+
   };
 
 
@@ -43,7 +41,7 @@ function Main(props: MainPropsType) {
       setActiveCityName(city);
       if (key === activeCityName) {
         setActiveCityOffers(value);
-        setActiveCityLocation(value[0]['city']);
+        // setActiveCityLocation(value);
       }
     });
   };

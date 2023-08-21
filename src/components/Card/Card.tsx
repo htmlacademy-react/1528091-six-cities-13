@@ -1,25 +1,26 @@
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler} from 'react';
 import { OfferType } from '../../utils/types/OfferType';
 import { Link } from 'react-router-dom';
 
 type OfferPropsType = {
   card: OfferType;
-  onHover: (cardId: string) => void;
+  onHover: (cardId?: string) => void;
 }
 
 type hoverType = MouseEventHandler<HTMLElement>
-function Card(props: OfferPropsType) {
-  const {card, onHover} = props;
-  const [hoveredId, setHoveredID] = useState('');
 
+function Card({card, onHover}: OfferPropsType) {
 
-  const handleCardHover:hoverType = () => {
-    setHoveredID(card.id);
-    onHover(hoveredId);
-
+  const handleCardHover: hoverType = () => {
+    onHover(card.id);
   };
+
+  const handleRemoveHover: hoverType = () => {
+    onHover('');
+  };
+
   return (
-    <article className="cities__card place-card" onMouseOver={handleCardHover}>
+    <article className="cities__card place-card" onMouseOver={handleCardHover} onMouseLeave={handleRemoveHover}>
       {card.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

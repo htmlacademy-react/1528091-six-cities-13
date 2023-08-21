@@ -1,15 +1,13 @@
 import { useParams } from 'react-router-dom';
 import CommentForm from '../../components/CommentForm/CommentForm';
-import cardsList from '../../mockData/cardData';
-import { OfferType } from '../../utils/types/OfferType';
+import cardsMockList from '../../mockData/cardData';
 import Map from '../../components/Map/Map';
-import Rating from '../../components/Rating/Rating';
 
 function Offer() {
-  const offersList = cardsList;
+
   const {id} = useParams();
-  const offer = offersList.find<OfferType>((card) => card.id === id);
-  console.log(offer);
+  const offer = cardsMockList.find((card) => card.id === id);
+
 
   return (
     <main className="page__main page__main--offer">
@@ -43,7 +41,7 @@ function Offer() {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <Rating score = {offer?.rating}></Rating>
+                    {/* <Rating score = {offer?.rating}></Rating> */}
                   </div>
                   <span className="offer__rating-value rating__value">{offer?.rating}</span>
                 </div>
@@ -144,7 +142,7 @@ function Offer() {
               </div>
             </div>
             <section className="offer__map map">
-              <Map city = {offer.city} points = {cardsList} selectedPoint={offer}></Map>
+              <Map city = {offer.city} points = {cardsMockList} selectedPoint={offer}></Map>
             </section>
           </section>
           <div className="container">

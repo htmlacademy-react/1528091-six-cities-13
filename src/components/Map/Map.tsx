@@ -28,9 +28,14 @@ function Map(props: MapProps) {
 
   useEffect(() => {
     if (map) {
-      map.setView([points[0].city.location.latitude, points[0].city.location.longitude], 12);
 
       const markerLayer = layerGroup().addTo(map);
+      map.setView({
+        lat:city.location.latitude,
+        lng: city.location.longitude
+      },
+      city.location.zoom
+      );
       points.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,

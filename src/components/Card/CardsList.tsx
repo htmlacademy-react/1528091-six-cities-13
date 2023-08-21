@@ -4,8 +4,9 @@ import Card from './Card';
 
 type CardsList = {
   cardsList: OfferType[];
-  onCardHover: (cardId: string) => void;
+  onCardHover: (cardId?: string) => void;
 }
+
 function OffersList(props:CardsList) {
   const {cardsList, onCardHover} = props;
 

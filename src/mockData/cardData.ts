@@ -1,6 +1,6 @@
 import {OfferType} from '../utils/types/OfferType';
 
-const cardsList: OfferType[] = [
+const cardsMockList: OfferType[] = [
   {
     'id': '946391b0-8888-466e-8d31-6e004469e1a0',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
@@ -2763,4 +2763,4 @@ const cardsList: OfferType[] = [
   }
 ];
 
-export default cardsList;
+export default cardsMockList;
