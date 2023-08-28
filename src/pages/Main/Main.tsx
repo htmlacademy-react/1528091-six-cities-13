@@ -3,10 +3,9 @@ import OffersList from '../../components/Card/CardsList';
 import { useEffect, useState } from 'react';
 import { OfferCity, OfferType } from '../../utils/types/OfferType';
 import { DEFAULT_CITY_LOCATION } from '../../utils/constants';
-import cardsMockList from '../../mockData/cardData';
 import CitiesList from '../../components/CitiesList/CitiesList';
-import { fetchCity, fetchOffers } from '../../redux/actions/offerActions';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { fetchCity} from '../../redux/actions/offerActions';
+import { useAppDispatch } from '../../utils/hooks';
 import { StateType } from '../../utils/types/State';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +15,6 @@ function Main() {
   const dispatch = useAppDispatch();
 
   const {offers} = useSelector((state: StateType) => state.offers);
-  console.log(offers);
 
   const [selectedPoint, setSelectedPoint] = useState<OfferType | undefined>(
     undefined
@@ -31,7 +29,6 @@ function Main() {
   );
 
   const citiesFullArray = offers.map((item) => item.city.name);
-  // console.log(citiesFullArray);
 
   const citiesArray = Array.from(new Set(citiesFullArray));
   const activeCityOffersList = offers.filter((item) => item.city.name === activeCityName);
@@ -56,8 +53,6 @@ function Main() {
     const location = offers.filter((item) => item.city.name === activeCityName)[0].city;
     setActiveCityLocation(location);
   };
-
-
 
 
   useEffect(() => {
