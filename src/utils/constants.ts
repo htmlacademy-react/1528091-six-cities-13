@@ -20,3 +20,25 @@ export const DEFAULT_CITY_LOCATION = {
     'zoom': 13
   }
 };
+
+export enum Cityname {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf',
+}
+
+
+export enum NameSpace {
+  Offers = 'Offers',
+  Offer = 'Offer',
+  Favorites = 'Favorites',
+  NearPlaces = 'NearPlaces',
+  Reviews = 'Reviews',
+  User = 'User',
+  City = 'City'
+}
+
+

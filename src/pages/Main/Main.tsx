@@ -2,17 +2,22 @@ import Map from '../../components/Map/Map';
 import OffersList from '../../components/Card/CardsList';
 import { useEffect, useState } from 'react';
 import { OfferCity, OfferType } from '../../utils/types/OfferType';
-import dataObjType from '../../utils/types/DataObjectType';
 import { DEFAULT_CITY_LOCATION } from '../../utils/constants';
 import cardsMockList from '../../mockData/cardData';
+import CitiesList from '../../components/CitiesList/CitiesList';
+import { fetchCity, fetchOffers } from '../../redux/actions/offerActions';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { StateType } from '../../utils/types/State';
+import { useSelector } from 'react-redux';
 
-type MainPropsType = {
-  cardsList: dataObjType;
-}
 
-function Main(props: MainPropsType) {
+function Main() {
 
-  const {cardsList} = props;
+  const dispatch = useAppDispatch();
+
+  const {offers} = useSelector((state: StateType) => state.offers);
+  console.log(offers);
+
   const [selectedPoint, setSelectedPoint] = useState<OfferType | undefined>(
     undefined
   );
@@ -20,34 +25,45 @@ function Main(props: MainPropsType) {
   const [activeCityOffers, setActiveCityOffers] = useState<OfferType[]>(
     []
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [activeCityLocation, setActiveCityLocation] = useState<OfferCity>(
     DEFAULT_CITY_LOCATION
   );
 
+  const citiesFullArray = offers.map((item) => item.city.name);
+  // console.log(citiesFullArray);
+
+  const citiesArray = Array.from(new Set(citiesFullArray));
+  const activeCityOffersList = offers.filter((item) => item.city.name === activeCityName);
+
   const handleListItemHover = (cardId?: string) => {
-    const currentPoint = cardsMockList.find((card) => card.id === cardId);
+    const currentPoint = activeCityOffersList.find((card) => card.id === cardId);
     if(currentPoint) {
       setSelectedPoint(currentPoint);
     }
-
-
   };
-
 
   const handleCityChoice = (city: string) => {
-    const offersArray = Object.entries(cardsList);
-    offersArray.forEach(([key, value]) => {
-      setActiveCityName(city);
-      if (key === activeCityName) {
-        setActiveCityOffers(value);
-        // setActiveCityLocation(value);
-      }
-    });
+    setActiveCityName(city);
+    dispatch(fetchCity(city));
   };
+
+  const handleActiveCityOffers = () => {
+    setActiveCityOffers(activeCityOffersList);
+  };
+
+  const handleActiveCityLocation = () => {
+    const location = offers.filter((item) => item.city.name === activeCityName)[0].city;
+    setActiveCityLocation(location);
+  };
+
+
+
 
   useEffect(() => {
     handleCityChoice(activeCityName);
+    handleActiveCityOffers();
+    handleActiveCityLocation();
   }, [activeCityName, activeCityLocation]);
 
 
@@ -58,15 +74,14 @@ function Main(props: MainPropsType) {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {Object.keys(cardsList).map((city) =>
+              {citiesArray.map((city) =>
                 (
-                  <li key = {city} className="locations__item">
-                    <a className={`locations__item-link tabs__item ${city === activeCityName ? 'tabs__item--active' : ''}`}
-                      href="#" onClick={() => handleCityChoice(city)}
-                    >
-                      <span>{city}</span>
-                    </a>
-                  </li>
+                  <CitiesList
+                    key={city}
+                    city={city}
+                    isActive = {city === activeCityName}
+                    onCityClick = {handleCityChoice}
+                  />
                 )
               )}
             </ul>

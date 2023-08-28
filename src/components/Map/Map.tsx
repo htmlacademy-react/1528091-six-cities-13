@@ -3,8 +3,8 @@ import 'leaflet/dist/leaflet.css';
 
 import { useEffect, useRef } from 'react';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../utils/constants';
-import { MapProps } from '../../utils/types/MapPropsType';
 import useMap from '../../utils/hooks/useMap';
+import { OfferCity, OfferType } from '../../utils/types/OfferType';
 
 
 const defaultCustomIcon = new Icon({
@@ -19,6 +19,11 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
+type MapProps = {
+  city: OfferCity;
+  points: OfferType[];
+  selectedPoint?: OfferType;
+};
 
 function Map(props: MapProps) {
   const {city, points, selectedPoint} = props;
@@ -28,14 +33,9 @@ function Map(props: MapProps) {
 
   useEffect(() => {
     if (map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
 
       const markerLayer = layerGroup().addTo(map);
-      map.setView({
-        lat:city.location.latitude,
-        lng: city.location.longitude
-      },
-      city.location.zoom
-      );
       points.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,

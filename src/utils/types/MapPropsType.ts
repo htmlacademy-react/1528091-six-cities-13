@@ -1,4 +1,3 @@
-import { OfferCity, OfferType } from './OfferType';
 
 
 type Point = {
@@ -7,11 +6,5 @@ type Point = {
   lng: number;
 };
 
-type MapProps = {
-  city: OfferCity;
-  points: OfferType[];
-  selectedPoint: OfferType | undefined;
-};
 
-
-export type {MapProps, Point};
+export type {Point};

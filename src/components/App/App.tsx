@@ -1,6 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Main from '../../pages/Main/Main';
-import MainProps from '../../utils/types/MainType';
 import Header from '../Header/Header';
 import Layout from '../Layout/Layout';
 import Login from '../../pages/Login/Login';
@@ -9,15 +8,16 @@ import Offer from '../../pages/Offer/Offer';
 import ErrorPage from '../../pages/ErrorPage/ErrorPage';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
+import favoritesList from '../../mockData/favorites';
 import {OfferType} from '../../utils/types/OfferType';
 import dataObjType from '../../utils/types/DataObjectType';
+import cardsMockList from '../../mockData/cardData';
 
 
-function App(props: MainProps) {
+function App() {
 
 
-  const {cardsList, favoritesList} = props;
-
+  const cardsList = cardsMockList;
   const cardsListObject:dataObjType = {
     Paris: [],
     Cologne: [],
@@ -74,7 +74,7 @@ function App(props: MainProps) {
         <Header/>
         <Routes>
           <Route path='/' element={<Layout/>}/>
-          <Route index element={<Main cardsList = {cardsListObject}/>} />
+          <Route index element={<Main/>} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/offer/:id' element={<Offer/>}/>
           <Route path='*' element={<ErrorPage/>}/>
