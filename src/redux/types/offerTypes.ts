@@ -1,0 +1,7 @@
+export const FETCH_CITY = 'FETCH_CITY';
+export const FETCH_OFFERS = 'FETCH_OFFERS';
+export const FETCH_OFFER = 'FETCH_OFFER';
+export const FETCH_NEAR_OFFERS = 'FETCH_NEAR_OFFERS';
+export const FETCH_REVIEWS = 'FETCH_REVIEWS';
+export const DROP_OFFER = 'DROP_OFFER';
+export const FETCH_FAVORITES = 'FETCH_REVIEWS';
